@@ -4,7 +4,9 @@ var io = require('socket.io')(app);
 var fs = require('fs');
 var _ = require('underscore');
 // 监听端口
-app.listen(3000);
+app.listen(3000,function(){
+    console.log("监听3000端口")
+});
 var hashName = new Array();
  
 function handler(req, res) {
@@ -20,8 +22,10 @@ function handler(req, res) {
 // io.sockets.on('connection', function (socket) { ... }) 的作用是服务器监听所有客户端 并返回该新连接对象
 // 这个事件在在客户端与服务器建立链接时自动触发
 io.on('connection', function (socket) {
+    console.log("连接")
     // 不管是服务器还是客户端都有 emit 和 on 这两个函数，socket.io 的核心就是这两个函数
     socket.on('login', function (data) {
+        console.log("登录")
         var name = data.name;
         // // 储存上线的用户
         hashName[name] = socket.id;
@@ -33,6 +37,7 @@ io.on('connection', function (socket) {
      * 这个匿名函数的第一个参数为接收的数据，如果有第二个参数，则是要返回的函数。
      */
     socket.on('send', function (data) {
+        console.log("发送")
         var to = data.to
         var name = data.name
         var word = data.word
