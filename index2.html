@@ -81,7 +81,7 @@
         },
         mounted(){
             var that = this
-            this.socket = io.connect('127.0.0.1:3000');
+            this.socket = io.connect('http://101.132.170.199:3000');
             this.socket.on('message',function (data) {
                 debugger
                 that.history += data.name+'对'+data.to+'说:' + data.word + '\n'
